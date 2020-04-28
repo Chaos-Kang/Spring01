@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import cn.edu.scujcc.model.Channel;
+import cn.edu.scujcc.model.Comment;
 import cn.edu.scujcc.service.ChannelService;
 
 /**
@@ -109,5 +110,14 @@ public class ChannelController {
 	@GetMapping("/hot")
 	public List<Channel> getHotChannels(){
 		return service.getLatestCommentsChannel();
+	}
+	/**
+	 * 新增评论
+	 * channelId 被评论的频道编号
+	 * comment 将要新增的评论对象
+	 */
+	@PostMapping("/{channelId}/comment")
+	public void addComment(@PathVariable String channelId,@RequestBody Comment comment) {
+		logger.debug("将为频道"+channelId+"新增一条评论："+comment);
 	}
 }
